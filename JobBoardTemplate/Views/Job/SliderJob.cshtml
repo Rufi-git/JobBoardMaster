@@ -1,0 +1,30 @@
+﻿@model List<JobBoardTemplate.Models.JobModel>
+<div class="single_slider  d-flex align-items-center slider_bg_1">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 col-md-6">
+                <div class="slider_text">
+                    @if (Model.Count < 5000)
+                    {
+                        <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">@Model.Count Jobs listed</h5>
+                    }
+                    else
+                    {
+                        <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">5000+ Jobs listed</h5>
+                    }
+
+                    <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Find your Dream Job</h3>
+                    <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">We provide online instant cash loans with quick approval that suit your term length</p>
+                    <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                        <a href="#" class="boxed-btn3">Upload your Resume</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ilstration_img wow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
+    <img src="~/Content/img/banner/illustration.png" alt="">
+</div>
+
+

@@ -1,0 +1,48 @@
+﻿@model List<JobBoardTemplate.Models.BlogModel>
+@{
+    List<string> str = new List<string>();
+}
+
+<div class="blog_left_sidebar">
+    @foreach (var article in Model)
+    {
+        <article class="blog_item">
+            <div class="blog_item_img">
+                <img class="card-img rounded-0" src="~/Content/img/blog/@article.ImagePath" alt="">
+                <a href="#" class="blog_item_date">
+                    <h3>@article.PublishDate.ToString("dd")</h3>
+                    <p>@article.PublishDate.ToString("MMM")</p>
+                </a>
+            </div>
+
+            <div class="blog_details">
+                <a class="d-inline-block" href="single-blog.html">
+                    <h2>@Html.ActionLink(article.Title, "Details", "Blog", routeValues: new { Id = article.Id }, htmlAttributes: new { @class = "article-title" })</h2>
+                </a>
+                <p>
+                    @article.ShortDescription
+                </p>
+                <ul class="blog-info-link">
+                    <li>
+                        @if (article.CategoryBlog.Count() > 0)
+                        {
+                            <i class="fa fa-user"></i>
+                            foreach (var category in article.CategoryBlog)
+                            {
+                                str.Add(category.Name);
+                            }
+                            <a href="#">@String.Join(" -> ", str)</a>
+                            str.Clear();
+                        }
+                    </li>
+                    <li><a href="#"><i class="fa fa-comments"></i> @article.Comments.Count Comments</a></li>
+                </ul>
+            </div>
+        </article>
+
+    }
+
+    <nav class="blog-pagination justify-content-center d-flex">
+        @Html.Action("GetAllArticles", "Blog")
+    </nav>
+</div>

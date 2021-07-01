@@ -1,0 +1,428 @@
+﻿@model JobBoardTemplate.Areas.Admin.Models.CategoryModel
+
+@{
+    ViewBag.Title = "EditCategoryJob";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section modalCss{
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/category.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/editCategory.css">
+}
+@section alert {
+    @if (ViewBag.JobEdit != null)
+    {
+        <script>
+            swal.fire("Good job!", "Job Successfully Edited", "success");
+        </script>
+    }
+    @if (ViewBag.JobDelete != null)
+    {
+        <script>
+            swal.fire("Good job!", "Job Successfully Deleted", "success");
+        </script>
+    }
+    @if (ViewBag.AddedJob != null)
+    {
+        <script>
+            swal.fire("Good job!", "Job Successfully Added", "success");
+        </script>
+    }
+}
+
+<div class="wrapper mt-5">
+    <h2>EditCategoryJob</h2>
+
+    @using (Html.BeginForm("EditCategoryJob", "Category", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>CategoryModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsPopular, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsPopular)
+                        @Html.ValidationMessageFor(model => model.IsPopular, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.HiddenFor(x => x.Id)
+                    <input type="submit" value="Save Changes" class="btn btn-success mt-2" />
+                </div>
+            </div>
+        </div>
+    }
+    <hr />
+    <h3>Jobs in @Model.Name</h3>
+
+    <section class="section">
+        <div class="card" style="display:inline-block">
+            <div class="head-wrapper d-flex align-items-center justify-content-between">
+                <div class="card-header" style="display:inline-block">
+                    Simple Datatable
+                </div>
+                @Html.ActionLink("Add Job", "Add", "Job")
+            </div>
+
+            <div class="card-body">
+                <table class="table table-striped" id="table1" width="200">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Hour</th>
+                            <th>Date</th>
+                            <th>Active</th>
+                            <th>Order</th>
+                            <th>Vacancy</th>
+                            <th>Salary</th>
+                            <th>Description</th>
+                            <th>Qualifications</th>
+                            <th>Responsibility</th>
+                            <th>Benefits</th>
+                            <th>Edit Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var job in Model.Jobs)
+                        {
+                            <tr class="text-center">
+                                <td class="border-2">
+                                    <div class="thumb">
+                                        <img src="~/Content/img/svg_icon/@job.ImagePath" width="100" height="120" alt="">
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modelName_@job.Id">
+                                        Name
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelName_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.Name
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    <button type="button" class="btn btn-light-success btn_loc" data-toggle="modal" data-target="#modelJobLoc_@job.Id">
+                                        Location
+                                    </button>
+                                    <br />
+                                    <p></p>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelJobLoc_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <p> <i class="fa fa-map-marker"></i>@job.Location</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    <p>@job.WorkDuration</p>
+                                </td>
+                                <td class="border-2">
+                                    <button type="button" class="btn btn-light-success" data-toggle="modal" data-target="#modelJobDate_@job.Id">
+                                        Publish date
+                                    </button>
+                                    <br />
+                                    <p></p>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelJobDate_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.PublisDate.ToString("dddd, dd MMMM yyyy")
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-light-primary" data-toggle="modal" data-target="#modelJobExDate_@job.Id">
+                                        Expire date
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelJobExDate_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.ExpireDate.ToString("dddd, dd MMMM yyyy")
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    @if (job.IsActive == true)
+                                    {
+                                        <span class="badge bg-success">Active</span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Not Active</span>
+                                    }
+                                </td>
+                                <td class="border-2">
+                                    <span class="badge bg-secondary">@job.Order</span>
+                                </td>
+                                <td class="border-2">
+                                    <span class="badge bg-danger">
+                                        @job.Vacancy
+                                    </span>
+                                </td>
+                                <td class="border-2">
+                                    <button type="button" class="btn btn-light-secondary" data-toggle="modal" data-target="#modelJobSalFrom_@job.Id">
+                                        From
+                                    </button>
+                                    <br />
+                                    <p></p>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelJobSalFrom_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.SalaryFrom
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-light-warning btn_to" data-toggle="modal" data-target="#modelJobSalTo_@job.Id">
+                                        To
+                                    </button>
+                                    <br />
+                                    <p></p>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelJobSalTo_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.SalaryTo
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-light-info" data-toggle="modal" data-target="#modelJob_@job.Id">
+                                        Desription
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelJob_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.Description
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-light-primary" data-toggle="modal" data-target="#modelQual_@job.Id">
+                                        Qualification
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelQual_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.Qualifications
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-light-success" data-toggle="modal" data-target="#modelRes_@job.Id">
+                                        Resposibility
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelRes_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.Responsibility
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    <button type="button" class="btn btn-light-danger" data-toggle="modal" data-target="#modelBen_@job.Id">
+                                        Benefits
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelBen_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    @job.Benefits
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-info px-4 mb-3 modal-btn"
+                                                            data-dismiss="modal">
+                                                        Ok
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border-2">
+                                    @Html.ActionLink("Edit", "EditJob", "Job", routeValues: new { Id = job.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                                    <br /><br />
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modelCatJob_@job.Id">
+                                        Delete
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modelCatJob_@job.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                                             role="document">
+                                            <div class="modal-content text-center">
+                                                <div class="modal-header text-center">
+                                                    <img src="~/Content/img/svg_icon/@job.ImagePath" width="150" height="150" />
+                                                    <h4 style="margin-left:0px">
+                                                        @job.Name
+                                                    </h4>
+                                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <i data-feather="x"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p style="color:#000000; font-size:1.5em">
+                                                        This category will be permanently deleted<br />
+                                                    </p>
+                                                    <span style="font-size:1em">Do you really want to delete?</span>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-secondary"
+                                                            data-dismiss="modal">
+                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Close</span>
+                                                    </button>
+                                                    @Html.ActionLink("Delete", "Delete", "Job", routeValues: new { Id = job.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                </td>
+                            </tr>
+                        }
+                </table>
+            </div>
+        </div>
+
+    </section>
+    @*@Html.Action("JobsNotInCategory", "Job")*@
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+

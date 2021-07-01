@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Blogs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section categoryCss{
+    <link rel="stylesheet" href="~/Content/css/category.css">
+    <link rel="stylesheet" href="~/Content/css/popular.css">
+    <link rel="stylesheet" href="~/Content/css/feed.css">
+}
+
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>blog</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                @{Html.RenderAction("Articles", "Blog");}
+            </div>
+            <div class="col-lg-4">
+                @{Html.RenderPartial("_BlogRightSidePartial");}
+            </div>
+        </div>
+</section>
+

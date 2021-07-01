@@ -1,0 +1,106 @@
+﻿@using JobBoardTemplate.Models;
+@model RegisterModel
+
+@{
+    ViewBag.Title = "Testimonial";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+@section loginCss{
+    <link rel="stylesheet" href="~/Content/css/login.css">
+}
+<style>
+    #auth {
+        overflow-y: auto !important
+    }
+</style>
+<div class="row h-100 justify-content-center">
+    <div class="col-lg-8 col-12">
+        <div id="auth-left">
+            <h1 class="auth-title text-center login-single">Sign up for Testimonial.</h1>
+            <p class="auth-subtitle mb-5 text-center">Talk about yourself to be in the Testimonial</p>
+            @using (Html.BeginForm("Testimonial", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.ValidationSummary(true);
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <p class="mb-1">Choose your profile</p>
+                    <div class="col-md-10 mb-5">
+                        @Html.TextBoxFor(model => model.Image, new { type = "file", accept = "image/png, image/jpeg", @style = "" })
+                    </div>
+                </div>
+                <div class="wrapper d-flex justify-content-between gap-5">
+                    <div class="left" style="width: 600px">
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control form-control-xl", placeholder = "Name" })
+
+                            @Html.ValidationMessageFor(x => x.Name)
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.TextBoxFor(x => x.Surname, new { @class = "form-control form-control-xl", placeholder = "Surname" })
+
+                            @Html.ValidationMessageFor(x => x.Surname)
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control form-control-xl", placeholder = "Username" })
+
+                            @Html.ValidationMessageFor(x => x.UserName)
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control form-control-xl", placeholder = "Email" })
+
+                            @Html.ValidationMessageFor(x => x.Email)
+                        </div>
+                    </div>
+
+                    <div class="right" style="width: 600px">
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control form-control-xl", placeholder = "Password" })
+
+                            @Html.ValidationMessageFor(x => x.Password)
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control form-control-xl", placeholder = "Confirm password" })
+
+                            @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.EditorFor(x => x.Age, new { htmlAttributes = new { @class = "form-control form-control-xl", placeholder = "Age" } })
+
+                            @Html.ValidationMessageFor(x => x.Age)
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            @Html.DropDownListFor(x => x.Gender, new SelectList(Enum.GetValues(typeof(Gender))),
+                                                    new { @class = "form-control form-control-xl", placeholder = "Select Gender" })
+                            @Html.ValidationMessageFor(x => x.Gender)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group position-relative has-icon-left mb-4">
+                    @Html.TextAreaFor(x => x.AboutMe, rows: 5, columns: 10, htmlAttributes: new { @class = "form-control form-control-xl", @placeholder = "About Me" })
+
+                    @Html.ValidationMessageFor(x => x.AboutMe)
+                </div>
+                <div class="form-group position-relative has-icon-left mb-4">
+                    @Html.TextAreaFor(x => x.Review, rows: 5, columns: 10, htmlAttributes: new { @class = "form-control form-control-xl", @placeholder = "Review" })
+
+                    @Html.ValidationMessageFor(x => x.AboutMe)
+                </div>
+                <div class="form-check form-check-lg d-flex align-items-end">
+                    <input class="form-check-input me-3" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                        Keep me logged in
+                    </label>
+                </div>
+                <button class="btn text-white btn-block btn-lg shadow-lg mt-5 btn-login">Sign up</button>
+            }
+            <div class="text-center mt-5 text-lg fs-4">
+                <p class="text-gray-600">
+                    Don't have an account?
+                    @Html.ActionLink("Sign up.", "Register", "Account", new { @class = "font-bold" })
+                </p>
+                <p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+

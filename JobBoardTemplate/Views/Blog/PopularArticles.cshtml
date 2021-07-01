@@ -1,0 +1,16 @@
+﻿@model List<JobBoardTemplate.Models.BlogModel>
+
+<h3 class="widget_title">Popular Blogs</h3>
+
+@foreach (var article in Model)
+{
+    <div class="media post_item">
+        <img src="~/Content/img/blog/@article.ImagePath" alt="post">
+        <div class="media-body">
+            <a href="single-blog.html">
+                <h3>@Html.ActionLink(article.Title, "Details", "Blog", routeValues: new { Id = article.Id }, htmlAttributes: new { @class = "article-title"})</h3>
+            </a>
+            <p>@article.PublishDate.ToString("dd MMMM yyyy")</p>
+        </div>
+    </div>
+}

@@ -1,0 +1,52 @@
+﻿@using JobBoardTemplate.Data
+@{
+    ViewData["Title"] = "Job Board Home page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@section indexCss{
+    <link rel="stylesheet" href="~/Content/css/testimonial.css">
+    <link rel="stylesheet" href="~/Content/css/candidate.css">
+    <link rel="stylesheet" href="~/Content/css/popularJobCategories.css">
+    <link rel="stylesheet" href="~/Content/css/topCompanies.css">
+}
+
+<!-- slider_area_start -->
+<div class="slider_area">
+    @Html.Action("SliderJob", "Job")
+</div>
+<!-- slider_area_end -->
+<!-- catagory_area -->
+<div class="catagory_area">
+    @Html.Action("PopularToSearch", "Category")
+</div>
+<!--/ catagory_area -->
+<!-- popular_catagory_area_start  -->
+<div class="popular_catagory_area">
+    @{Html.RenderAction("PopularJobCategories", "Category");}
+</div>
+<!-- popular_catagory_area_end  -->
+<!-- job_listing_area_start  -->
+<div class="job_listing_area">
+    @Html.Action("AllJobs", "Job")
+</div>
+<!-- job_listing_area_end  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area">
+    @Html.Action("Candidates", "Candidate")
+</div>
+<!-- featured_candidates_area_end  -->
+
+<div class="top_companies_area">
+    @{Html.RenderAction("TopCompanies", "Company"); }
+</div>
+
+<!-- job_searcing_wrap  -->
+<div class="job_searcing_wrap overlay">
+    @{Html.RenderPartial("_JobSearchPartial");}
+</div>
+<!-- job_searcing_wrap end  -->
+<!-- testimonial_area  -->
+<div class="testimonial_area">
+    @Html.Action("Testimonial", "AppUser")
+</div>

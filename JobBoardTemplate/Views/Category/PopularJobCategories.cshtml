@@ -1,0 +1,25 @@
+﻿@model List<JobBoardTemplate.Models.CategoryJobModel>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="section_title mb-40">
+                <h3>Popular Categories</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            <div class="col-lg-4 col-xl-3 col-md-6">
+                <div class="single_catagory">
+                    <h4>
+                        @Html.ActionLink(@category.Name, "Details", "Category", routeValues: new { Id = category.Id }, htmlAttributes: new { @class = "job_name" })
+                    </h4>
+                    <p> <span>@category.Jobs.Count</span> Available position</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

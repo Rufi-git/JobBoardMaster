@@ -1,0 +1,168 @@
+﻿@using JobBoardTemplate.Models;
+@model BlogDetailModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section detailCss{
+    <link rel="stylesheet" href="~/Content/css/feed.css">
+    <link rel="stylesheet" href="~/Content/css/popular.css">
+}
+<style>
+    .feed-img {
+        height: 500px !important;
+        width: 730px !important
+    }
+</style>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>single blog</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!--================Blog Area =================-->
+<section class="blog_area single-post-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    <div class="feature-img">
+                        <img class="img-fluid feed-img" src="~/Content/img/blog/@Model.ImagePath">
+                        @Html.HiddenFor(x => x.Id, new { @id= "articleId" });
+                    </div>
+                    <div class="blog_details">
+                        <h2>
+                            @Model.Title
+                        </h2>
+                        @*<input type="hidden" name="articleId" id="articleId" value="@Model.Id" />*@
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                            <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                        </ul>
+                        <p class="excert">
+                            @Model.ShortDescription
+                        </p>
+                        <p class="excert">
+                            @Model.ShortDescription
+                        </p>
+                        <div class="quote-wrapper">
+                            <div class="quotes">
+                                @Model.Description
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <p class="like-info">
+                            <span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
+                            people like this
+                        </p>
+                        <div class="col-sm-4 text-center my-2 my-sm-0">
+                            <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="navigation-area">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                <div class="thumb">
+                                    <a href="#">
+                                        <img class="img-fluid" src="img/post/preview.png" alt="">
+                                    </a>
+                                </div>
+                                <div class="arrow">
+                                    <a href="#">
+                                        <span class="lnr text-white ti-arrow-left"></span>
+                                    </a>
+                                </div>
+                                <div class="detials">
+                                    <p>Prev Post</p>
+                                    <a href="#">
+                                        <h4>Space The Final Frontier</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                                <div class="detials">
+                                    <p>Next Post</p>
+                                    <a href="#">
+                                        <h4>Telescopes 101</h4>
+                                    </a>
+                                </div>
+                                <div class="arrow">
+                                    <a href="#">
+                                        <span class="lnr text-white ti-arrow-right"></span>
+                                    </a>
+                                </div>
+                                <div class="thumb">
+                                    <a href="#">
+                                        <img class="img-fluid" src="img/post/next.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment_list">
+                    @if (Model.Comments.Any())
+                    {
+                        <div class="comments-area">
+                            <h4>@Model.Comments.Count Comments</h4>
+
+                            @foreach (var comment in Model.Comments)
+                            {
+                                <div class="comment-list">
+                                    <div class="single-comment justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <img src="~/Content/img/users/@comment.ImagePath " alt="">
+                                            </div>
+                                            <div class="desc">
+                                                <h5>
+                                                    <a href="#">@comment.Name</a>
+                                                </h5>
+                                                <div class="">
+                                                    <p class="comment">
+                                                        @comment.Text
+                                                    </p>
+                                                    <div class="d-flex">
+                                                        <p class="date ml-0">@comment.PublishDate.ToString("dddd, dd MMMM yyyy") at 3:12 pm </p>
+                                                        <div class="reply-btn">
+                                                            <a href="#" class="btn-reply text-uppercase">reply</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    }
+                </div>
+
+
+                @{ Html.RenderPartial("_CommentsPartial", new CommentModel { BlogId = Model.Id });}
+
+            </div>
+            <div class="col-lg-4">
+                @{Html.RenderPartial("_BlogRightSidePartial");}
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Blog Area end =================-->

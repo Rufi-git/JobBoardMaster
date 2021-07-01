@@ -1,0 +1,37 @@
+﻿@model List<JobBoardTemplate.Models.MenuModel>
+
+<div class="main-menu  d-none d-lg-block">
+    <nav>
+        <ul id="navigation">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+            @foreach (var menu in Model)
+            {
+                <li>
+                    @if (menu.ActionName != null)
+                    {
+                        @Html.ActionLink(menu.Name, menu.ActionName, menu.ControllerName)
+
+                    }
+                    else
+                    {
+                        <a href="#">@menu.Name</a>
+                    }
+                    @if (menu.SubMenus.Count > 0)
+                    {
+                        <i class="ti-angle-down"></i>
+                    }
+                    <ul class="submenu">
+                        @foreach (var submenu in menu.SubMenus)
+                        {
+                            if (submenu.MenuId == menu.Id)
+                            {
+                                <li>@Html.ActionLink(submenu.Name, submenu.ActionName, submenu.ControllerName)</li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

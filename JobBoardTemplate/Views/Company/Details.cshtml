@@ -1,0 +1,104 @@
+﻿@model JobBoardTemplate.Models.CompanyDetailModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section companyDetail{
+    <link rel="stylesheet" href="~/Content/css/companyDetail.css">
+}
+
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center d-flex flex-column" style="gap:10px">
+                    <h1 class="founder-info">@Model.Founder.Name @Model.Founder.Surname</h1>
+                    <h3 style="font-size:40px; text-transform:initial">Founder of</h3>
+                    <h1 class="founder-info">@Model.Name</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 mb-5">
+                <div class="blog_left_sidebar">
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <img class="card-img rounded-0" src="~/Content/img/founders/@Model.Founder.ImagePath" alt="">
+                            <a href="#" class="blog_item_date">
+                                <h3>15</h3>
+                                <p>Jan</p>
+                            </a>
+                        </div>
+
+                        <div class="blog_details text-center">
+                            <a class="d-inline-block" href="single-blog.html">
+                                <h2 class="founder_name">@Model.Founder.Name @Model.Founder.Surname</h2>
+                            </a>
+                            <a class="d-block" href="single-blog.html">
+                                <h4 class="founder_occupation">@Model.Founder.Occupation</h4>
+                            </a>
+                            <p>
+                                That dominion stars lights dominion divide years for fourth have don't stars is that
+                                he earth it first without heaven in place seed it second morning saying.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center about_founder">
+            <h1>Company that @Model.Founder.Name @Model.Founder.Surname own </h1>
+            <div class="col-lg-10">
+                <div class="single_jobs white-bg d-flex p-4">
+                    <div class="jobs_left d-flex align-items-center justify-content-between">
+                        <div class="thumb">
+                            <img src="~/Content/img/svg_icon/@Model.ImagePath" alt="">
+                        </div>
+                        <div class="jobs_conetent">
+                            <a href="job_details.html"><h2>@Model.Name</h2></a>
+                        </div>
+                    </div>
+                    <div class="jobs_right">
+                        <div class="apply_now">
+                            <a class="heart_mark" href="#"> <i class="ti-heart"></i></a>
+                            <a href="job_details.html" class="boxed-btn3">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jobs mt-5">
+            <h1 style="margin-bottom:0px;" class="text-center">Jobs in @Model.Name Company</h1>
+            <div class="row justify-content-center mt-5 founder_jobs">
+                @foreach (var job in Model.Jobs)
+                {
+                    <div class="col-lg-10">
+                        <div class="single_jobs white-bg d-flex p-4">
+                            <div class="jobs_left d-flex align-items-center justify-content-between">
+                                <div class="thumb">
+                                    <img src="~/Content/img/svg_icon/@job.ImagePath" alt="">
+                                </div>
+                                <div class="jobs_conetent">
+                                    <a href="job_details.html"><h2>@job.Name</h2></a>
+                                </div>
+                            </div>
+                            <div class="jobs_right">
+                                <div class="apply_now">
+                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i></a>
+                                    <a href="job_details.html" class="boxed-btn3">Apply Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>

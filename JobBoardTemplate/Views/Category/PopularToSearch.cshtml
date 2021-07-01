@@ -1,0 +1,20 @@
+﻿@model List<JobBoardTemplate.Models.CategoryJobModel>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="popular_search d-flex align-items-center">
+                <span>Popular Search:</span>
+                <ul>
+                    @foreach (var popular in Model)
+                    {
+                        <li>
+                            @Html.ActionLink(popular.Name, "Details", "Category", routeValues: new { Id = popular.Id }, htmlAttributes: new { })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

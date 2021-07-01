@@ -1,0 +1,18 @@
+﻿@model IEnumerable<JobBoardTemplate.Models.TagModel>
+@{
+    List<string> str = new List<string>();
+}
+<h4 class="widget_title">Tag Clouds</h4>
+<ul class="list" style="display:grid; grid-template-columns:auto auto; justify-content:space-around">
+    @foreach (var tag in Model)
+    {
+        str.Add(tag.Name);
+        str.Add(tag.Blogs.Count().ToString());
+        <li>
+            <span style="margin-left:5px">
+                @Html.ActionLink(String.Join("  ", str), "Details", "Tag", routeValues: new { Id = tag.Id }, htmlAttributes: new { @class = "tag-detail",@style="font-size:15px;padding:5px 20px" })
+            </span>
+        </li>
+        str.Clear();
+    }
+</ul>

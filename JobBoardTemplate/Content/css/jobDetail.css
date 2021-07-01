@@ -1,0 +1,10 @@
+﻿.job-name:hover {
+    color: #00D363;
+}
+.hidden-input {
+    border: 0;
+    color: #7A838B;
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0
+}

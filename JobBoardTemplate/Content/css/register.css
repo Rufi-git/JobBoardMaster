@@ -1,0 +1,20 @@
+﻿.validation-summary-errors {
+    color: red;
+    font-size: 1.2em
+}
+
+.field-validation-error {
+    color: red;
+}
+.wrapper {
+    transform:translateY(-5%)
+}
+.auth-title {
+    color: #07964a;
+}
+.signup-btn {
+    background:#07964a
+}
+.login-btn {
+    color:#07964a;
+}

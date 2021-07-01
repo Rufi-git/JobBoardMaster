@@ -1,0 +1,29 @@
+﻿@model List<JobBoardTemplate.Models.CompanyModel>
+<div class="container">
+    <div class="row align-items-center mb-40">
+        <div class="col-lg-6 col-md-6">
+            <div class="section_title">
+                <h3>Top Companies</h3>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="brouse_job text-right">
+                <h1 class="boxed-btn4">@Html.ActionLink("Browse More Job", "Jobs", "Home")</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var company in Model)
+        {
+            <div class="col-lg-4 col-xl-3 col-md-6">
+                <div class="single_company">
+                    <div class="thumb">
+                        <img src="~/Content/img/svg_icon/@company.ImagePath" alt="">
+                    </div>
+                    <h3>@Html.ActionLink(company.Name, "Details", "Company", routeValues: new { Id = company.Id }, htmlAttributes: new { @class = "job-name" })</h3>
+                    <p> <span>@company.Jobs.Count</span> Available position</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

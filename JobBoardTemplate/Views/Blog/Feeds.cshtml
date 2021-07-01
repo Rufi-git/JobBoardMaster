@@ -1,0 +1,12 @@
+﻿@model List<JobBoardTemplate.Models.BlogModel>
+<h4 class="widget_title">Instagram Feeds</h4>
+<ul class="instagram_row flex-wrap">
+    @foreach (var article in Model)
+    {
+        <li>
+            <a href="#">
+                <img class="img-fluid" src="~/Content/img/blog/@article.ImagePath" alt="">
+            </a>
+        </li>
+    }
+</ul>

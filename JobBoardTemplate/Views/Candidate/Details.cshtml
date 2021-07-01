@@ -1,0 +1,76 @@
+﻿@model JobBoardTemplate.Models.CandidateModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section detailsCandidateCss{
+    <link rel="stylesheet" href="~/Content/css/candidateDestail.css"> 
+}
+
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>About <span style="color: rgb(171, 224, 233">  @Model.AppUser.Name @Model.AppUser.Surname</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="blog_area section-padding" style="background: #F5F7FA">
+    <div class="container">
+        <div class="row" style="">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <img class="card-img" src="~/Content/img/users/@Model.AppUser.ImagePath" alt="">
+                            <a href="#" class="blog_item_date">
+                                <h3>15</h3>
+                                <p>Jan</p>
+                            </a>
+                        </div>
+
+                        <div class="blog_details text-center">
+                            <a class="d-inline-block" href="single-blog.html">
+                                <h2>@Model.AppUser.Name @Model.AppUser.Surname</h2>
+                            </a>
+                            <p>
+                                That dominion stars lights dominion divide years for fourth have don't stars is that
+                                he earth it first without heaven in place seed it second morning saying.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h1 class="text-center p-2">Candidated Jobs</h1>
+                <div class="job_lists">
+                    <div class="row">
+                        @foreach (var job in Model.Jobs)
+                        {
+                            <div class="col-lg-12 col-md-12 bg-white d-flex p-4 single-job">
+                                <div class="single_jobs d-flex justify-content-between">
+                                    <div class="jobs_left d-flex justify-content-around">
+                                        <div class="thumb">
+                                            <img src="~/Content/img/svg_icon/@job.ImagePath" alt="" width="60"/>
+                                        </div>
+                                        <div class="jobs_conetent d-flex flex-column">
+                                            <h4>@Html.ActionLink(@job.Name, "Details", "Job", routeValues: new { Id = job.Id }, htmlAttributes: new { @class = "job-name"})</h4>
+                                            <div class="links_locat d-flex align-items-center">
+                                                <div class="location">
+                                                    <p> <i class="fa fa-map-marker"></i>@job.Location</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

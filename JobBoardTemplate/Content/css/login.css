@@ -1,0 +1,25 @@
+﻿.validation-summary-errors {
+    color: red;
+    font-size: 1.2em
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.form-check-input:checked {
+    background-color: #07964a;
+    border-color: #07964a;
+}
+
+.login-single {
+    color: #07964a;
+}
+
+.btn-login {
+    background:#07964a;
+}
+
+.font-bold {
+    color: #07964a !important
+}

@@ -1,0 +1,17 @@
+﻿<div class="row align-items-center">
+    <div class="col-xl-3 col-lg-2">
+        @{Html.RenderPartial("_LogoPartial");}
+    </div>
+    <div class="col-xl-6 col-lg-7">
+        @Html.Action("Menus", "Menu")
+    </div>
+    <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+        @{Html.RenderPartial("_LoginPanelPartial");}
+    </div>
+    <div>
+       @*@Response.Cookies.Get(1)*@
+    </div>
+    <div class="col-12">
+        <div class="mobile_menu d-block d-lg-none"></div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@model JobBoardTemplate.Areas.Admin.Models.CategoryModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>JobsNotInCategory</title>
+</head>
+<body>
+    @foreach (var job in Model.Jobs)
+    {
+        <div>
+            <h4>Job</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @job.Name
+                </dt>
+            </dl>
+        </div>
+    }
+
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿.dataTable-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dataTable-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dataTable-selector {
+    width: 80px;
+}
+

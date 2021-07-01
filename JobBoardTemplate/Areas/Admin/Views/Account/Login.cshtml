@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model JobBoardTemplate.Areas.Admin.Models.LoginModel
+@section ValidationCss{
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/validationLogin.css">
+}
+<style>
+  
+</style>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="account_login white-bg col-lg-8 mt-5">
+            <h4 class="mb-3">Login</h4>
+            <div class="row">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post, htmlAttributes: new { @class = "col-md-12 " }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="col-md-12">
+                        <div class="input_field mb-4">
+                            @Html.LabelFor(x => x.Email)
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Email)
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input_field mb-4">
+                            @Html.LabelFor(x => x.Password)
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Password)
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="submit_btn">
+                            <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section ValidationProcess{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" referrerpolicy="no-referrer"></script>
+}

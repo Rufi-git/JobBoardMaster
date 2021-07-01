@@ -1,0 +1,67 @@
+﻿@model List<JobBoardTemplate.Areas.Admin.Models.CommentBlogModel>
+
+@{
+    Layout = null;
+}
+<html>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h3>Comments that not listed in this blog</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" id="table1">
+                <thead class="text-center">
+                    <tr>
+                        <th>Image</th>
+                        <th>Content</th>
+                        <th>Is Active?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var comment in Model)
+                    {
+                        <tr class="border-2">
+                            <td class="border-2 text-center">
+                                <img src="~/Content/img/users/@comment.ImagePath" class="author_img" />
+                            </td>
+                            <td class="border-2">
+                                <div class="desc">
+                                    <h5>
+                                        <a href="#">@comment.Name</a>
+                                    </h5>
+                                    <h5 class="social_media">
+                                        @comment.Website
+                                        <span>
+                                            @comment.Email
+                                        </span>
+                                    </h5>
+                                    <div class="">
+                                        <p class="comment">
+                                            @comment.Text
+                                        </p>
+                                        <div class="d-flex">
+                                            <p class="date ml-0">@comment.PublishDate.ToString("dddd, dd MMMM yyyy") at 3:12 pm </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center border-2">
+                                @if (comment.IsActive == true)
+                                {
+                                    <span class="badge bg-success">@comment.IsActive</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">@comment.IsActive</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

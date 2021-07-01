@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Content/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/app.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/pages/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js">
+    @RenderSection("loginCss", false)
+    @RenderSection("registerCss", false)
+</head>
+
+<body>
+    <div id="auth" style="overflow:hidden">
+        @RenderBody();
+    </div>
+</body>
+
+</html>
+@RenderSection("alertRegister", false)
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-CrNI25BFwyQ47q3MiZbfATg0ZoG6zuNh2ANn/WjyqvN4ShWfwPeoCOi9pjmX4DoNioMQ5gPcphKKF+oVz3UjRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

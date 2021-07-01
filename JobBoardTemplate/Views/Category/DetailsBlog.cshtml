@@ -1,0 +1,77 @@
+﻿@model JobBoardTemplate.Models.CategoryBlogModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section categoryCss{
+    <link rel="stylesheet" href="~/Content/css/category.css">
+    <link rel="stylesheet" href="~/Content/css/popular.css">
+    <link rel="stylesheet" href="~/Content/css/feed.css">
+}
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>single blog</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="blog_left_sidebar">
+                    @foreach (var article in Model.Blogs)
+                    {
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="~/Content/img/blog/@article.ImagePath" alt="">
+                                <a href="#" class="blog_item_date">
+                                    <h3>@article.PublishDate.ToString("dd")</h3>
+                                    <p>@article.PublishDate.ToString("MMM")</p>
+                                </a>
+                            </div>
+
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="single-blog.html">
+                                    <h2>@Html.ActionLink(article.Title, "Details", "Blog", routeValues: new { Id = article.Id }, htmlAttributes: new { @class = "article-title" })</h2>
+                                </a>
+                                <p>
+                                    @article.ShortDescription
+                                </p>
+                            </div>
+                        </article>
+                    }
+
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Previous">
+                                    <i class="ti-angle-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link">1</a>
+                            </li>
+                            <li class="page-item active">
+                                <a href="#" class="page-link">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Next">
+                                    <i class="ti-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                @{Html.RenderPartial("_BlogRightSidePartial");}
+            </div>
+
+        </div>
+    </div>
+</section>

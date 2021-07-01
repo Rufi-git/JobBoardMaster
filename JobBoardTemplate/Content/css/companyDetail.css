@@ -1,0 +1,54 @@
+﻿.founder-info {
+    color: white;
+    font-size: 50px;
+    letter-spacing: 3px
+}
+
+.blog_area {
+    background-color: #F5F7FA
+}
+
+.card-img {
+    height: 750px;
+}
+
+.founder_name {
+    letter-spacing: 3px;
+}
+
+.founder_occupation {
+    color: #769ec1;
+    font-size: 18px
+}
+
+.about_founder {
+    position: relative
+}
+
+    .about_founder > h1 {
+        margin-bottom: 40px
+    }
+
+.single_jobs {
+    gap: 200px
+}
+
+.jobs_left {
+    flex-grow: 1
+}
+
+.heart_mark {
+    margin-right: 20px
+}
+
+.founder_jobs {
+    gap: 20px;
+}
+
+.single_jobs > .jobs_left {
+    flex-grow: 1
+}
+
+.jobs_right > .apply_now {
+    margin-right: 20px
+}
